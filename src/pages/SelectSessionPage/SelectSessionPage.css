@@ -3,6 +3,10 @@
   font-family: "Roboto";
 }
 
+.select-session {
+  overflow-y: scroll;
+}
+
 .select-session h3 {
   height: 100px;
   display: flex;
@@ -41,6 +45,7 @@
 .select-session div.sessions div.weekday button {
   height: 43px;
   width: 82px;
+  margin: 0;
   font-size: 18px;
   color: #ffffff;
   background-color: #E8833A;
