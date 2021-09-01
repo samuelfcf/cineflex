@@ -1,7 +1,7 @@
-const MovieCard = () => {
+const MovieCard = ({ postUrl, name }) => {
   return (
     <div className="movie-card">
-      <img src="https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg" alt="" />
+      <img src={postUrl} alt={name} />
     </div>
   )
 }

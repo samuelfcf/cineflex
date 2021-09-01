@@ -1,21 +1,38 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { MovieCard } from "./MovieCard";
 import "./SelectMoviePage.css";
 
 const SelectMoviePage = () => {
+
+  const [movies, setMovies] = useState([]);
+
+  const getMovies = async () => {
+    await axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/movies")
+      .then((response) => {
+        const data = response.data;
+        const movies = data;
+        setMovies(movies);
+      })
+  }
+
+  useEffect(() => {
+    getMovies();
+  }, []);
+
   return (
     <>
       <Header />
-
       <div className="select-movie">
         <h3>Selecione o filme</h3>
         <div>
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
+          {movies.map((movie, index) => (
+            <MovieCard
+              key={index}
+              title={movie.name}
+              postUrl={movie.posterURL} />
+          ))}
         </div>
       </div>
     </>
