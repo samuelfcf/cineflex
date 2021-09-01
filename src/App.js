@@ -1,8 +1,13 @@
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { SelectMoviePage } from "./pages/SelectMoviePage/SelectMoviePage";
+
 function App() {
   return (
-    <>
-      <h1>Cineflex</h1>
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={SelectMoviePage} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
