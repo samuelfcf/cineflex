@@ -1,6 +1,6 @@
-const Seat = ({ id, name }) => {
+const Seat = ({ id, name, isAvailable }) => {
   return (
-    <div className="seat">{id < 10 ? `0${name}` : `${name}`}</div>
+    <div className={isAvailable ? "seat" : "seat unavailable"}>{id < 10 ? `0${name}` : `${name}`}</div>
   );
 }
 

@@ -42,7 +42,6 @@ const SelectSessionPage = () => {
           {movie.days.map(((day) => (
             <Weekday
               key={day.id}
-              id={day.id}
               weekday={day.weekday}
               date={day.date}
               showtimes={day.showtimes} />

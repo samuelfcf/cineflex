@@ -10,7 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={SelectMoviePage} />
         <Route exact path="/sessoes/:idMovie" component={SelectSessionPage} />
-        <Route exact path="/assentos" component={SelectSeatPage} />
+        <Route exact path="/assentos/:idSession" component={SelectSeatPage} />
         <Route exact path="/sucesso" component={SucessPage} />
       </Switch>
     </BrowserRouter>

@@ -32,6 +32,9 @@ div.baseboard {
   gap: 14px;
   padding-left: 20px;
   background-color: #DFE6ED;
+
+  position:fixed;
+  bottom: 0;
 }
 
 div.baseboard div.movie-card {
@@ -52,4 +55,9 @@ div.baseboard div.movie-card img {
 
 div.baseboard div.movie-card h3 {
   font-size: 26px;
+}
+
+div.baseboard div.session-info h3{
+  font-size: 23px;
+  color: #293845;
 }

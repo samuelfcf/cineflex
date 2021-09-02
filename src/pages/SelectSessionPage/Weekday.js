@@ -1,18 +1,21 @@
-const Weekday = ({ id, weekday, date, showtimes }) => {
+import { Link } from "react-router-dom";
 
-  const ola = (idd, name) => {
-    console.log(idd, name)
-  }
+const Weekday = ({ weekday, date, showtimes }) => {
+
 
   return (
+
     <div className="weekday">
       {weekday} {date}
       <div className="schedules">
         {showtimes.map((showtime) => (
-          <button key={showtimes.id} id={showtimes.id} onClick={() => ola(showtime.id, showtime.name)} className="schedule">{showtime.name}</button>
+          <Link to={`/assentos/${showtime.id}`}>
+            <button key={showtimes.id} className="schedule">{showtime.name}</button>
+          </Link>
         ))}
       </div>
     </div>
+
   );
 }
 
