@@ -1,8 +1,12 @@
-const MovieCard = ({ postUrl, name }) => {
+import { Link } from "react-router-dom";
+
+const MovieCard = ({ id, postUrl, name }) => {
   return (
-    <div className="movie-card">
-      <img src={postUrl} alt={name} />
-    </div>
+    <Link to={`/sessoes/${id}`}>
+      <div className="movie-card">
+        <img src={postUrl} alt={name} />
+      </div>
+    </Link>
   )
 }
 

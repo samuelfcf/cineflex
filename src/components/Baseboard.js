@@ -1,10 +1,10 @@
-const Baseboard = () => {
+const Baseboard = ({ urlImage, title }) => {
   return (
     <div className="baseboard">
       <div className="movie-card">
-        <img src="https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg" alt="" />
+        <img src={urlImage} alt="" />
       </div>
-      <h3>Enola Holmes</h3>
+      <h3>{title}</h3>
     </div>
   );
 }
