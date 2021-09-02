@@ -23,7 +23,7 @@ const SelectSessionPage = () => {
   }
 
   useEffect(() => {
-    getSessionsList()
+    getSessionsList();
   }, []);
 
   if (!movie) {
@@ -39,9 +39,14 @@ const SelectSessionPage = () => {
       <div className="select-session">
         <h3>Selecione o horário</h3>
         <div className="sessions">
-          <Weekday />
-          <Weekday />
-          <Weekday />
+          {movie.days.map(((day) => (
+            <Weekday
+              key={day.id}
+              id={day.id}
+              weekday={day.weekday}
+              date={day.date}
+              showtimes={day.showtimes} />
+          )))}
         </div>
 
         <Baseboard

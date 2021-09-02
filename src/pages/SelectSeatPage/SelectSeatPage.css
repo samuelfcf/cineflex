@@ -6,6 +6,7 @@
 .select-seats {
   height: 700px;
   overflow-y: scroll;
+  margin-top: 80px;
 }
 
 .select-seats h3 {
@@ -20,6 +21,7 @@
 .seats {
   padding-left: 25px;
   padding-right: 25px;
+  margin-top: 25px;
 
   display: flex;
   flex-wrap: wrap;
@@ -69,6 +71,7 @@
   flex-direction: column;
   padding-top: 25px;
   gap: 15px;
+  margin-top: 30px;
   
 }
 
@@ -108,4 +111,5 @@ button {
   color: #ffffff;
   font-size: 18px;
   margin: 0 auto;
+  margin-top: 20px;
 }

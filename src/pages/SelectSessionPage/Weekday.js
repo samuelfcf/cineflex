@@ -1,10 +1,16 @@
-const Weekday = () => {
+const Weekday = ({ id, weekday, date, showtimes }) => {
+
+  const ola = (idd, name) => {
+    console.log(idd, name)
+  }
+
   return (
     <div className="weekday">
-      Quinta-feira - 24/06/2021
+      {weekday} {date}
       <div className="schedules">
-        <button className="schedule">15:00</button>
-        <button className="schedule">19:00</button>
+        {showtimes.map((showtime) => (
+          <button key={showtimes.id} id={showtimes.id} onClick={() => ola(showtime.id, showtime.name)} className="schedule">{showtime.name}</button>
+        ))}
       </div>
     </div>
   );
