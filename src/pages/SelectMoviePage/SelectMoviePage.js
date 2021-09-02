@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
+import { Loading } from "../../components/Loading/Loading";
 import { MovieCard } from "./MovieCard";
 import "./SelectMoviePage.css";
 
 const SelectMoviePage = () => {
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState("");
 
   const getMovies = async () => {
     await axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/movies")
@@ -20,6 +21,12 @@ const SelectMoviePage = () => {
   useEffect(() => {
     getMovies();
   }, []);
+
+  if (!movies) {
+    return (
+      <Loading />
+    );
+  }
 
   return (
     <>

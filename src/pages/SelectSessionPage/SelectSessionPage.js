@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Baseboard } from "../../components/Baseboard";
 import { Header } from "../../components/Header";
+import { Loading } from "../../components/Loading/Loading";
 import "./SelectSessionPage.css";
 import { Weekday } from "./Weekday";
 
@@ -24,6 +25,12 @@ const SelectSessionPage = () => {
   useEffect(() => {
     getSessionsList()
   }, []);
+
+  if (!movie) {
+    return (
+      <Loading />
+    );
+  }
 
   return (
     <>
