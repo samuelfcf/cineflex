@@ -5,7 +5,7 @@ import { Baseboard } from "../../components/Baseboard";
 import { Header } from "../../components/Header";
 import { Loading } from "../../components/Loading/Loading";
 import { Seat } from "./Seat";
-import "./SelectSeatPage.css"
+import "./SelectSeatPage.css";
 
 const SelectSeatPage = () => {
 
@@ -16,18 +16,28 @@ const SelectSeatPage = () => {
       posterURL: ""
     },
     day: {
-      date: "",
       weekday: ""
     }
   });
+  const [chosenSeats, setChosenSeats] = useState({
+    ids: [],
+    name: "",
+    cpf: ""
+  });
+  const [fields, setFields] = useState({
+    name: "",
+    cpf: ""
+  });
+
   const { idSession } = useParams();
 
   const getSessionSeats = async () => {
     await axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${idSession}/seats`)
       .then((response) => {
         const data = response.data;
-        const seats = data.seats;
         const baseboardData = data;
+        //console.log(baseboardData)
+        const seats = data.seats;
         setSeats(seats);
         setBaseboardData(baseboardData);
       })
@@ -37,14 +47,36 @@ const SelectSeatPage = () => {
     getSessionSeats();
   }, []);
 
-  if (seats.length === 0 && !baseboardData) {
+  const selectSeat = (seatId) => {
+    if (chosenSeats.ids.includes(seatId)) {
+      chosenSeats.ids.splice(chosenSeats.ids.indexOf(seatId), 1);
+    } else {
+      chosenSeats.ids = [...chosenSeats.ids, seatId];
+    }
+  }
+
+  const handleChange = (event) => {
+    setFields({ ...fields, [event.target.name]: event.target.value });
+  }
+
+  const reservar = () => {
+    setChosenSeats({ ...chosenSeats, name: fields.name, cpf: fields.cpf });
+
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/seats/book-many", chosenSeats)
+      .then(() => alert("Assento(s) salvo com suceso!"))
+      .catch(err => console.error(err));
+
+    setChosenSeats({
+      name: "",
+      cpf: ""
+    })
+  }
+
+  if (seats.length === 0) {
     return (
       <Loading />
     );
   }
-
-  console.log(baseboardData);
-
 
   return (
     <>
@@ -57,9 +89,8 @@ const SelectSeatPage = () => {
           {seats.map((seat) => (
             <Seat
               key={seat.id}
-              id={seat.id}
-              name={seat.name}
-              isAvailable={seat.isAvailable} />
+              seat={seat}
+              selectSeat={selectSeat} />
           ))}
         </div>
 
@@ -81,13 +112,25 @@ const SelectSeatPage = () => {
         <div className="form">
           <div>
             Nome do comprador:
-            <input type="text" placeholder="Digite seu nome..."></input>
+            <input required
+              autoComplete="off"
+              type="text"
+              name="name"
+              value={fields.name}
+              onChange={handleChange}
+              placeholder="Digite seu nome..." />
           </div>
           <div>
             CPF do comprador:
-            <input type="text" placeholder="Digite seu CPF..."></input>
+            <input required
+              type="text"
+              autoComplete="off"
+              name="cpf"
+              value={fields.cpf}
+              onChange={handleChange}
+              placeholder="Digite seu CPF..." />
           </div>
-          <button>Reservar assento(s)</button>
+          <button onClick={reservar}>Reservar assento(s)</button>
         </div>
       </div>
 

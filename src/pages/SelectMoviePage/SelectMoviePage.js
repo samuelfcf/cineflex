@@ -34,7 +34,7 @@ const SelectMoviePage = () => {
       <div className="select-movie">
         <h3>Selecione o filme</h3>
         <div>
-          {movies.map((movie, index) => (
+          {movies.map((movie) => (
             <MovieCard
               key={movie.id}
               id={movie.id}

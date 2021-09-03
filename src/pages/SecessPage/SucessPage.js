@@ -1,7 +1,7 @@
 import { Header } from "../../components/Header";
 import "./SucessPage.css";
 
-const SucessPage = () => {
+const SucessPage = ({ state }) => {
   return (
     <>
       <Header />
