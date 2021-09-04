@@ -34,8 +34,6 @@ const SelectSessionPage = () => {
 
   return (
     <>
-      <Header />
-
       <div className="select-session">
         <h3>Selecione o horário</h3>
         <div className="sessions">

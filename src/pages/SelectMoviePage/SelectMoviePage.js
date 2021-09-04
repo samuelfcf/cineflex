@@ -30,7 +30,6 @@ const SelectMoviePage = () => {
 
   return (
     <>
-      <Header />
       <div className="select-movie">
         <h3>Selecione o filme</h3>
         <div>

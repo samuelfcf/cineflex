@@ -7,12 +7,9 @@ const SucessPage = () => {
   const location = useLocation();
   const movieData = location.state.movieData;
   const buyerData = location.state.buyerData;
-  console.log(buyerData);
 
   return (
     <>
-      <Header />
-
       <div className="confirm-info">
         <h3> Pedido feito <br /> com sucesso!</h3>
 

@@ -14,7 +14,7 @@ const SelectSeatPage = () => {
   const [seats, setSeats] = useState([]);
   const [baseboardData, setBaseboardData] = useState("");
   const [chosenSeats, setChosenSeats] = useState({ ids: [] });
-  const [fields, setFields] = useState("");
+  const [inputFields, setInputFields] = useState("");
 
   const { idSession } = useParams();
 
@@ -42,7 +42,7 @@ const SelectSeatPage = () => {
   }
 
   const handleChange = (event) => {
-    setFields({ ...fields, [event.target.name]: event.target.value });
+    setInputFields({ ...inputFields, [event.target.name]: event.target.value });
   }
 
   const validateCPF = (cpf) => {
@@ -52,11 +52,11 @@ const SelectSeatPage = () => {
 
   const reserveSeats = () => {
 
-    if (!fields.name || !validateCPF(fields.cpf) || chosenSeats.ids.length === 0) {
+    if (!inputFields.name || !validateCPF(inputFields.cpf) || chosenSeats.ids.length === 0) {
       return alert("Por favor, informe os dados corretamente e/ou selecione no mínimo um assento");
     }
 
-    const request = { ...chosenSeats, name: fields.name, cpf: fields.cpf }
+    const request = { ...chosenSeats, name: inputFields.name, cpf: inputFields.cpf }
 
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/seats/book-many", request)
       .then(() => {
@@ -64,7 +64,7 @@ const SelectSeatPage = () => {
       })
       .catch(err => console.error(err));
 
-    setChosenSeats({
+    setInputFields({
       name: "",
       cpf: ""
     })
@@ -78,8 +78,6 @@ const SelectSeatPage = () => {
 
   return (
     <>
-      <Header />
-
       <div className="select-seats">
         <h3>Seleciona o(s) assento(s)</h3>
 
@@ -114,7 +112,7 @@ const SelectSeatPage = () => {
               autoComplete="off"
               type="text"
               name="name"
-              value={fields.name}
+              value={inputFields.name}
               onChange={handleChange}
               placeholder="Digite seu nome..." />
           </div>
@@ -124,7 +122,7 @@ const SelectSeatPage = () => {
               type="text"
               autoComplete="off"
               name="cpf"
-              value={fields.cpf}
+              value={inputFields.cpf}
               onChange={handleChange}
               placeholder="Digite seu CPF..." />
           </div>

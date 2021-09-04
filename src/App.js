@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Header } from "./components/Header";
 import { SucessPage } from "./pages/SecessPage/SucessPage";
 import { SelectMoviePage } from "./pages/SelectMoviePage/SelectMoviePage";
 import { SelectSeatPage } from "./pages/SelectSeatPage/SelectSeatPage";
@@ -7,6 +8,7 @@ import { SelectSessionPage } from "./pages/SelectSessionPage/SelectSessionPage";
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Switch>
         <Route exact path="/" component={SelectMoviePage} />
         <Route exact path="/sessoes/:idMovie" component={SelectSessionPage} />

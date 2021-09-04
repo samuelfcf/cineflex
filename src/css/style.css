@@ -23,6 +23,16 @@ header h1 {
   font-size: 34px;
 }
 
+img.back-button {
+  width: 35px;
+  position: fixed;
+  left: 20px;
+  top: 18px;
+  z-index: 2;
+
+  color: #E8833A;
+}
+
 div.baseboard {
   height: 117px;
   width: 100%;
