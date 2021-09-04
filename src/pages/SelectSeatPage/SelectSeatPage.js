@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Baseboard } from "../../components/Baseboard";
 import { Header } from "../../components/Header";
 import { Loading } from "../../components/Loading/Loading";
@@ -9,25 +9,12 @@ import "./SelectSeatPage.css";
 
 const SelectSeatPage = () => {
 
+  const history = useHistory();
+
   const [seats, setSeats] = useState([]);
-  const [baseboardData, setBaseboardData] = useState({
-    movie: {
-      title: "",
-      posterURL: ""
-    },
-    day: {
-      weekday: ""
-    }
-  });
-  const [chosenSeats, setChosenSeats] = useState({
-    ids: [],
-    name: "",
-    cpf: ""
-  });
-  const [fields, setFields] = useState({
-    name: "",
-    cpf: ""
-  });
+  const [baseboardData, setBaseboardData] = useState("");
+  const [chosenSeats, setChosenSeats] = useState({ ids: [] });
+  const [fields, setFields] = useState("");
 
   const { idSession } = useParams();
 
@@ -36,7 +23,6 @@ const SelectSeatPage = () => {
       .then((response) => {
         const data = response.data;
         const baseboardData = data;
-        //console.log(baseboardData)
         const seats = data.seats;
         setSeats(seats);
         setBaseboardData(baseboardData);
@@ -59,11 +45,23 @@ const SelectSeatPage = () => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   }
 
-  const reservar = () => {
-    setChosenSeats({ ...chosenSeats, name: fields.name, cpf: fields.cpf });
+  const validateCPF = (cpf) => {
+    const rule = /^([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}|[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2})$/
+    return rule.test(cpf)
+  }
 
-    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/seats/book-many", chosenSeats)
-      .then(() => alert("Assento(s) salvo com suceso!"))
+  const reserveSeats = () => {
+
+    if (!fields.name || !validateCPF(fields.cpf) || chosenSeats.ids.length === 0) {
+      return alert("Por favor, informe os dados corretamente e/ou selecione no mínimo um assento");
+    }
+
+    const request = { ...chosenSeats, name: fields.name, cpf: fields.cpf }
+
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/seats/book-many", request)
+      .then(() => {
+        history.push("/sucesso", { buyerData: request, movieData: baseboardData });
+      })
       .catch(err => console.error(err));
 
     setChosenSeats({
@@ -130,15 +128,17 @@ const SelectSeatPage = () => {
               onChange={handleChange}
               placeholder="Digite seu CPF..." />
           </div>
-          <button onClick={reservar}>Reservar assento(s)</button>
+          <button onClick={reserveSeats}>Reservar assento(s)</button>
         </div>
       </div>
 
-      <Baseboard
-        title={baseboardData.movie.title}
-        urlImage={baseboardData.movie.posterURL}
-        day={baseboardData.name}
-        weekday={baseboardData.day.weekday} />
+      {!baseboardData ? "" :
+        <Baseboard
+          title={baseboardData.movie.title}
+          urlImage={baseboardData.movie.posterURL}
+          day={baseboardData.name}
+          weekday={baseboardData.day.weekday} />
+      }
     </>
   );
 }

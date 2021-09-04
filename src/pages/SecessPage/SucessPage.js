@@ -1,7 +1,14 @@
+import { Link, useLocation } from "react-router-dom";
 import { Header } from "../../components/Header";
 import "./SucessPage.css";
 
-const SucessPage = ({ state }) => {
+const SucessPage = () => {
+
+  const location = useLocation();
+  const movieData = location.state.movieData;
+  const buyerData = location.state.buyerData;
+  console.log(buyerData);
+
   return (
     <>
       <Header />
@@ -13,27 +20,30 @@ const SucessPage = ({ state }) => {
           <div>
             <span>Filme e sessão</span>
             <div>
-              <p>Enola Holmes</p>
-              <p>24/06/2021 15:00</p>
+              <p>{movieData.movie.title}</p>
+              <p>{movieData.day.date} {movieData.name}</p>
             </div>
           </div>
           <div>
             <span>Ingressos</span>
             <div>
-              <p>Assento 15</p>
-              <p>Assento 16</p>
+              {buyerData.ids.map((seatId) => (
+                <p>Assento {seatId}</p>
+              ))}
             </div>
           </div>
           <div>
             <span>Comprador</span>
             <div>
-              <p>Nome: João da Silva Sauro</p>
-              <p>CPF: 123.456.789-10</p>
+              <p>Nome: {buyerData.name}</p>
+              <p>CPF: {buyerData.cpf}</p>
             </div>
           </div>
         </div>
 
-        <button>Voltar para Home</button>
+        <Link to="/">
+          <button>Voltar para Home</button>
+        </Link>
 
 
       </div>
