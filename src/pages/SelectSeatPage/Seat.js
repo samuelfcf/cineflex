@@ -15,10 +15,10 @@ const Seat = ({ seat, selectSeat }) => {
 
     if (seatStatus.includes("selected")) {
       setSelected(className);
-      selectSeat(id)
+      selectSeat(id, name)
     } else {
       setSelected("seat selected");
-      selectSeat(id)
+      selectSeat(id, name)
     }
   }
 

@@ -4,7 +4,6 @@ import { Button } from "./Buttom";
 const Header = () => {
 
   const location = useLocation();
-  console.log(location);
 
   return (
     <>

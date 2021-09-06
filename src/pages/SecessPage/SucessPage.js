@@ -1,12 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { Header } from "../../components/Header";
 import "./SucessPage.css";
 
 const SucessPage = () => {
 
   const location = useLocation();
   const movieData = location.state.movieData;
-  const buyerData = location.state.buyerData;
+  const orderData = location.state.orderData;
 
   return (
     <>
@@ -24,16 +23,16 @@ const SucessPage = () => {
           <div>
             <span>Ingressos</span>
             <div>
-              {buyerData.ids.map((seatId) => (
-                <p>Assento {seatId}</p>
+              {orderData.seatNumbers.map((number) => (
+                <p>Assento {number}</p>
               ))}
             </div>
           </div>
           <div>
             <span>Comprador</span>
             <div>
-              <p>Nome: {buyerData.name}</p>
-              <p>CPF: {buyerData.cpf}</p>
+              <p>Nome: {orderData.name}</p>
+              <p>CPF: {orderData.cpf}</p>
             </div>
           </div>
         </div>

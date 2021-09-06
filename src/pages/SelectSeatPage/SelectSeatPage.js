@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Baseboard } from "../../components/Baseboard";
-import { Header } from "../../components/Header";
 import { Loading } from "../../components/Loading/Loading";
 import { Seat } from "./Seat";
 import "./SelectSeatPage.css";
@@ -13,7 +12,7 @@ const SelectSeatPage = () => {
 
   const [seats, setSeats] = useState([]);
   const [baseboardData, setBaseboardData] = useState("");
-  const [chosenSeats, setChosenSeats] = useState({ ids: [] });
+  const [chosenSeats, setChosenSeats] = useState({ ids: [], seatNumbers: [] });
   const [inputFields, setInputFields] = useState("");
 
   const { idSession } = useParams();
@@ -33,11 +32,13 @@ const SelectSeatPage = () => {
     getSessionSeats();
   }, []);
 
-  const selectSeat = (seatId) => {
+  const selectSeat = (seatId, seatNumber) => {
     if (chosenSeats.ids.includes(seatId)) {
       chosenSeats.ids.splice(chosenSeats.ids.indexOf(seatId), 1);
+      chosenSeats.seatNumbers.splice(chosenSeats.seatNumbers.indexOf(seatNumber), 1);
     } else {
       chosenSeats.ids = [...chosenSeats.ids, seatId];
+      chosenSeats.seatNumbers = [...chosenSeats.seatNumbers, seatNumber];
     }
   }
 
@@ -60,7 +61,7 @@ const SelectSeatPage = () => {
 
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/seats/book-many", request)
       .then(() => {
-        history.push("/sucesso", { buyerData: request, movieData: baseboardData });
+        history.push("/sucesso", { orderData: request, movieData: baseboardData });
       })
       .catch(err => console.error(err));
 
@@ -79,7 +80,7 @@ const SelectSeatPage = () => {
   return (
     <>
       <div className="select-seats">
-        <h3>Seleciona o(s) assento(s)</h3>
+        <h3>Selecione o(s) assento(s)</h3>
 
         <div className="seats">
           {seats.map((seat) => (
@@ -108,7 +109,7 @@ const SelectSeatPage = () => {
         <div className="form">
           <div>
             Nome do comprador:
-            <input required
+            <input
               autoComplete="off"
               type="text"
               name="name"
@@ -118,7 +119,7 @@ const SelectSeatPage = () => {
           </div>
           <div>
             CPF do comprador:
-            <input required
+            <input
               type="text"
               autoComplete="off"
               name="cpf"
