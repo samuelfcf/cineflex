@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import "./SucessPage.css";
+import styled from "styled-components";
 
 const SucessPage = () => {
 
@@ -9,10 +9,10 @@ const SucessPage = () => {
 
   return (
     <>
-      <div className="confirm-info">
+      <ConfirmInfo>
         <h3> Pedido feito <br /> com sucesso!</h3>
 
-        <div className="informations">
+        <InformationsContainer>
           <div>
             <span>Filme e sessão</span>
             <div>
@@ -35,16 +35,70 @@ const SucessPage = () => {
               <p>CPF: {orderData.cpf}</p>
             </div>
           </div>
-        </div>
+        </InformationsContainer>
 
         <Link to="/">
-          <button>Voltar para Home</button>
+          <BackToHomeButton>Voltar para Home</BackToHomeButton>
         </Link>
 
 
-      </div>
+      </ConfirmInfo>
     </>
   );
 }
+
+const ConfirmInfo = styled.div`
+  * {
+    text-decoration: none;
+  }
+
+  h3 {
+  font-size: 24px;
+  height: 110px;
+  color: #247A6B;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  }
+`
+
+const InformationsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  padding-left: 28px;
+  margin-bottom: 70px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    span{
+      font-size: 24px;
+      font-weight: 700;
+      color: #293845;
+    }
+
+    p {
+      font-size: 22px;
+      font-weight: 400;
+      color: #293845;
+    }
+ }
+`
+
+const BackToHomeButton = styled.button`
+  width: 225px;
+  height: 42px;
+  background-color: #E8833A;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 export { SucessPage }

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { Loading } from "../../components/Loading/Loading";
 import { MovieCard } from "./MovieCard";
-import "./SelectMoviePage.css";
 
 const SelectMoviePage = () => {
 
@@ -29,7 +29,7 @@ const SelectMoviePage = () => {
 
   return (
     <>
-      <div className="select-movie">
+      <SelectMovieContainer>
         <h3>Selecione o filme</h3>
         <div>
           {movies.map((movie) => (
@@ -40,9 +40,29 @@ const SelectMoviePage = () => {
               postUrl={movie.posterURL} />
           ))}
         </div>
-      </div>
+      </SelectMovieContainer>
     </>
   )
 }
+
+const SelectMovieContainer = styled.div`
+  margin-top: 60px;
+
+  h3 {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#293845;
+  font-size: 24px;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 38px;
+}
+`
 
 export { SelectMoviePage }

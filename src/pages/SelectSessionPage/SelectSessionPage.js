@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 import { Baseboard } from "../../components/Baseboard";
-import { Header } from "../../components/Header";
 import { Loading } from "../../components/Loading/Loading";
-import "./SelectSessionPage.css";
 import { Weekday } from "./Weekday";
 
 const SelectSessionPage = () => {
@@ -34,7 +33,7 @@ const SelectSessionPage = () => {
 
   return (
     <>
-      <div className="select-session">
+      <SelectSessionContainer>
         <h3>Selecione o horário</h3>
         <div className="sessions">
           {movie.days.map(((day) => (
@@ -49,9 +48,39 @@ const SelectSessionPage = () => {
         <Baseboard
           title={movie.title}
           urlImage={movie.posterURL} />
-      </div>
+      </SelectSessionContainer>
     </>
   );
 }
+
+const SelectSessionContainer = styled.div`
+  overflow-y: scroll;
+  margin-top: 60px;
+  margin-bottom: 120px;
+  box-sizing: border-box;
+  font-family: "Roboto";
+  text-decoration: none;
+
+  * {
+    box-sizing: border-box;
+    font-family: "Roboto";
+    text-decoration: none;
+  }
+
+  h3 {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#293845;
+    font-size: 24px;
+  }
+
+  div.sessions {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+`
 
 export { SelectSessionPage }
