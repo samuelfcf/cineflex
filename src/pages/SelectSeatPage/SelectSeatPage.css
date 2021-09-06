@@ -92,6 +92,8 @@
   background-color: #FFFFFF;
   border: 1px solid #D5D5D5;
   border-radius: 3px;
+  padding-left: 16px;
+  font-size: 18px;
 }
 
 .form div input::placeholder {
@@ -99,7 +101,6 @@
   font-style: italic;
   font-weight: 400;
   font-size: 18px;
-  padding-left: 16px;
 }
 
 button {
