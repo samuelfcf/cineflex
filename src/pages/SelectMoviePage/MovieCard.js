@@ -8,7 +8,7 @@ const MovieCard = ({ id, postUrl, name }) => {
         <img src={postUrl} alt={name} />
       </StyledMovieCard>
     </Link>
-  )
+  );
 }
 
 const StyledMovieCard = styled.div`

@@ -41,7 +41,6 @@ const SucessPage = () => {
           <BackToHomeButton>Voltar para Home</BackToHomeButton>
         </Link>
 
-
       </ConfirmInfo>
     </>
   );
@@ -68,7 +67,6 @@ const InformationsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-
   padding-left: 28px;
   margin-bottom: 70px;
 
