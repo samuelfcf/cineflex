@@ -39,6 +39,7 @@ const SelectSeatPage = () => {
     } else {
       chosenSeats.ids = [...chosenSeats.ids, seatId];
       chosenSeats.seatNumbers = [...chosenSeats.seatNumbers, seatNumber];
+      setChosenSeats({ ...chosenSeats });
     }
   }
 

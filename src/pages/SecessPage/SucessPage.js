@@ -23,8 +23,8 @@ const SucessPage = () => {
           <div>
             <span>Ingressos</span>
             <div>
-              {orderData.seatNumbers.map((number) => (
-                <p>Assento {number}</p>
+              {orderData.seatNumbers.map((number, index) => (
+                <p key={index}>Assento {number}</p>
               ))}
             </div>
           </div>

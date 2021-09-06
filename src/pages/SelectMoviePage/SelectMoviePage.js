@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Header } from "../../components/Header";
 import { Loading } from "../../components/Loading/Loading";
 import { MovieCard } from "./MovieCard";
 import "./SelectMoviePage.css";
