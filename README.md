@@ -1,9 +1,7 @@
 <h1 align="center">Cineflex</h1>
 
-<h1>
-<div style="display: flex; justify-content: space-around">
+<h1 align="center">
   <img src="src/assets/cineflex.gif"></img>
-</div>
 </h1>
 
 ## 🔖 Sobre
